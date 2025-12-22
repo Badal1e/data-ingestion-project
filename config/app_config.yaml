@@ -1,0 +1,17 @@
+project:
+  name: simple-data-python-ingestion
+  environment: dev
+
+data:
+  entity: users
+  input_format: csv
+  output_format: json
+
+s3:
+  bucket: s3-data-python-ingestion-bucket
+  raw_prefix: raw/
+  processed_prefix: processed/
+  error_prefix: error/
+
+aws:
+  region: ap-south-1

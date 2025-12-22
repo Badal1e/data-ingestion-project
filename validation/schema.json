@@ -1,0 +1,17 @@
+{
+  "track_id": "string",
+  "track_name": "string",
+  "track_number": "int",
+  "track_popularity": "int",
+  "explicit": "boolean",
+  "artist_name": "string",
+  "artist_popularity": "int",
+  "artist_followers": "int",
+  "artist_genres": "string",
+  "album_id": "string",
+  "album_name": "string",
+  "album_release_date": "string",
+  "album_total_tracks": "int",
+  "album_type": "string",
+  "track_duration_min": "float"
+}

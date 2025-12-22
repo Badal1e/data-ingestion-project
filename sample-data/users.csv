@@ -1,0 +1,5 @@
+id,name,email,age,country
+1,Alice,alice@gmail.com,24,India
+2,Bob,bob@gmail.com,30,USA
+3,Charlie,,27,UK
+4,David,david@gmail.com,not_available,Canada
