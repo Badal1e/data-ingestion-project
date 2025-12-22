@@ -1,18 +1,25 @@
-REQUIRED_FIELDS = [
-    "track_id",
-    "track_name",
-    "artist_name",
-    "track_popularity"
-]
-
 def is_valid(row):
-    for field in REQUIRED_FIELDS:
-        if not row.get(field):
+    """
+    Universal validation for:
+    - Spotify CSV
+    - CoinGecko API JSON
+    """
+
+    # 1️⃣ Spotify CSV validation
+    if "track_id" in row and "track_popularity" in row:
+        try:
+            int(row["track_popularity"])
+        except:
             return False
+        return True
 
-    try:
-        int(row["track_popularity"])
-    except:
-        return False
+    # 2️⃣ CoinGecko JSON validation
+    if "id" in row and "current_price" in row:
+        try:
+            float(row["current_price"])
+        except:
+            return False
+        return True
 
-    return True
+    # 3️⃣ If no known schema matched
+    return False
