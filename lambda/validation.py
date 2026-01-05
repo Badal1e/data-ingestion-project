@@ -1,25 +1,24 @@
-def is_valid(row):
-    """
-    Universal validation for:
-    - Spotify CSV
-    - CoinGecko API JSON
-    """
+import pandas as pd
 
-    # 1️⃣ Spotify CSV validation
-    if "track_id" in row and "track_popularity" in row:
-        try:
-            int(row["track_popularity"])
-        except:
-            return False
-        return True
+def clean_dataframe(df: pd.DataFrame):
+    original_df = df.copy()
 
-    # 2️⃣ CoinGecko JSON validation
-    if "id" in row and "current_price" in row:
-        try:
-            float(row["current_price"])
-        except:
-            return False
-        return True
+    if "track_id" in df.columns and "track_popularity" in df.columns:
+        required_cols = ["track_id", "track_name", "artist_name", "track_popularity"]
 
-    # 3️⃣ If no known schema matched
-    return False
+        df["track_popularity"] = pd.to_numeric(df["track_popularity"], errors="coerce")
+
+        clean_df = df.dropna(subset=required_cols)
+        error_df = original_df.loc[~original_df.index.isin(clean_df.index)]
+
+        return clean_df, error_df
+
+    if "id" in df.columns and "current_price" in df.columns:
+        df["current_price"] = pd.to_numeric(df["current_price"], errors="coerce")
+
+        clean_df = df.dropna(subset=["id", "current_price"])
+        error_df = original_df.loc[~original_df.index.isin(clean_df.index)]
+
+        return clean_df, error_df
+
+    return pd.DataFrame(), original_df

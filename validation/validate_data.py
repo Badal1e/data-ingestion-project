@@ -3,12 +3,9 @@ import csv
 REQUIRED_FIELDS = ["track_id", "track_name", "artist_name", "track_popularity"]
 
 def is_valid(row):
-    # required must not be empty
     for field in REQUIRED_FIELDS:
         if field not in row or not row[field]:
             return False
-
-    # track_popularity must be numeric
     try:
         int(row["track_popularity"])
     except:
